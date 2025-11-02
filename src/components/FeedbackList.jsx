@@ -12,11 +12,11 @@ import { enUS } from 'date-fns/locale';
 /**
  * Renders the list of feedback with filter controls.
  * @param {Object} props
- * @param {Array} props.feedbackList - The full list of feedback items.
- * @param {Function} props.onDeleteRequest - Function to call to initiate deletion.
+ * @param {Array} props.feedbackList - full list of feedback items.
+ * @param {Function} props.onDeleteRequest - Function to initiate deletion.
  */
 function FeedbackList({ feedbackList, onDeleteRequest }) {
-  // --- STATE FOR FILTERS ---
+  // STATE FOR FILTERS
   const [keyword, setKeyword] = useState('');
   const [selectedDate, setSelectedDate] = useState(null); // Date picker ke liye
 
@@ -27,7 +27,7 @@ function FeedbackList({ feedbackList, onDeleteRequest }) {
   const getFilteredList = () => {
     return feedbackList
       .filter((item) => {
-        // 1. Keyword filter (name, email, message check karega)
+        // Keyword filter (name, email, message check karega)
         const keywordLower = keyword.toLowerCase();
         const matchesKeyword =
           item.name.toLowerCase().includes(keywordLower) ||
@@ -36,10 +36,10 @@ function FeedbackList({ feedbackList, onDeleteRequest }) {
         return matchesKeyword;
       })
       .filter((item) => {
-        // 2. Date filter
+        // Date filter
         if (!selectedDate) return true; // Agar date select nahi ki toh sab dikhao
         const itemDate = new Date(item.timestamp);
-        // Sirf date compare karo, time nahi
+        // compare date, not time 
         return itemDate.toDateString() === selectedDate.toDateString();
       });
   };
@@ -50,7 +50,7 @@ function FeedbackList({ feedbackList, onDeleteRequest }) {
     // Date picker ke liye LocalizationProvider zaroori hai
     <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enUS}>
       <div className="space-y-6">
-        {/* --- FILTER CONTROLS --- */}
+        {/* FILTER CONTROLS */}
         <Grid container spacing={2}>
           <Grid item xs={12} sm={8}>
             <TextField
@@ -71,10 +71,10 @@ function FeedbackList({ feedbackList, onDeleteRequest }) {
           </Grid>
         </Grid>
 
-        {/* --- FEEDBACK LIST --- */}
+        {/* FEEDBACK LIST */}
         <div className="space-y-4">
           {filteredList.length === 0 ? (
-            // --- Empty State UI (Better UI) ---
+            // Empty State UI
             <Box className="text-center bg-gray-100 p-10 rounded-lg">
               <svg
                 className="mx-auto h-12 w-12 text-gray-400"
@@ -113,7 +113,7 @@ function FeedbackList({ feedbackList, onDeleteRequest }) {
               </Typography>
             </Box>
           ) : (
-            // --- Render List Items ---
+            //Render List Items 
             filteredList.map((item) => (
               <FeedbackItem
                 key={item.id}

@@ -21,7 +21,7 @@ function FeedbackItem({ item, onDeleteRequest }) {
   return (
     <Card variant="outlined" className="transition-all duration-300 hover:shadow-lg">
       <CardContent>
-        {/* Header with Name and Delete Button */}
+        {/* Header with Name and Delete Button  */}
         <Box className="flex justify-between items-start">
           {/* Name and Email */}
           <div>
@@ -37,7 +37,7 @@ function FeedbackItem({ item, onDeleteRequest }) {
             aria-label="delete feedback"
             onClick={() => onDeleteRequest(item.id)}
             color="error" // Red color
-            className="transition-colors hover:bg-red-50"
+            className="transition-colors hover:bg-red-100"
           >
             <DeleteIcon />
           </IconButton>

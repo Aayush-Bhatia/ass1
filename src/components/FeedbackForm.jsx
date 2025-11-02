@@ -8,21 +8,20 @@ import {
   CircularProgress,
 } from '@mui/material';
 
-// --- EmailJS Configuration ---
-// !!! INKO APNI EMAILJS KEYS SE REPLACE KARNA !!!
+// EmailJS Configuration 
 const EMAILJS_SERVICE_ID = 'service_e5w4oz8';
 const EMAILJS_TEMPLATE_ID = 'template_v6d9k19';
 const EMAILJS_PUBLIC_KEY = 'jlorVxZYH73YIzIPk';
 
 
 /**
- * A form for submitting new feedback, using Material-UI.
+ * A form for submitting new feedback, using MUI.
  * On submit, it calls the parent prop AND sends an email via EmailJS.
  * @param {Object} props
  * @param {Function} props.onFeedbackSubmit - Callback function to call when form is submitted.
  */
 function FeedbackForm({ onFeedbackSubmit }) {
-  // --- Form State ---
+  // Form State
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -41,7 +40,7 @@ function FeedbackForm({ onFeedbackSubmit }) {
     setError('');
     setSuccess('');
 
-    // 1. Validation
+    // Validation
     if (!name.trim() || !email.trim() || !message.trim()) {
       setError('All fields are required.');
       return;
@@ -53,14 +52,14 @@ function FeedbackForm({ onFeedbackSubmit }) {
 
     setIsSubmitting(true); // Loading start
 
-    // 2. Prepare data for EmailJS template
+    // Prepare data for EmailJS template
     const templateParams = {
       name: name,
       email: email,
       message: message,
     };
 
-    // 3. Send the email
+    // Send the email
     emailjs.send(
       EMAILJS_SERVICE_ID,
       EMAILJS_TEMPLATE_ID,
@@ -68,34 +67,34 @@ function FeedbackForm({ onFeedbackSubmit }) {
       EMAILJS_PUBLIC_KEY
     )
     .then((response) => {
-      // 4. Email successful, ab data ko app state (localStorage) mein save karo
+      // Email successful, ab data ko app state (localStorage) mein save karo
       console.log('EmailJS SUCCESS!', response.status, response.text);
       onFeedbackSubmit({ name, email, message }); // Parent function call
       
-      // 5. Success message dikhao aur form clear karo
+      // Success message dikhao aur form clear karo
       setSuccess('Thank you! Your feedback has been sent.');
       setName('');
       setEmail('');
       setMessage('');
     })
     .catch((err) => {
-      // 6. Email fail ho gaya
+      // Email fail ho gaya
       console.error('EmailJS FAILED...', err);
       setError('Failed to send feedback. Please try again later.');
     })
     .finally(() => {
-      // 7. Loading state hamesha band karo
+      // Loading state hamesha band karo
       setIsSubmitting(false);
     });
   };
 
   return (
     <Box component="form" onSubmit={handleSubmit} noValidate className="space-y-4">
-      {/* --- Alert Messages --- */}
+      {/* Alert Messages */}
       {error && <Alert severity="error">{error}</Alert>}
       {success && <Alert severity="success">{success}</Alert>}
 
-      {/* --- Form Fields --- */}
+      {/* Form Fields */}
       <TextField
         label="Name"
         variant="outlined"
@@ -132,7 +131,7 @@ function FeedbackForm({ onFeedbackSubmit }) {
         error={!!error && !message.trim()}
       />
 
-      {/* --- Submit Button with Loading Spinner --- */}
+      {/* Submit Button with Loading Spinner */}
       <Box sx={{ position: 'relative' }}>
         <Button 
           type="submit" 

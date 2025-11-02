@@ -154,7 +154,7 @@ export default function App() {
           {renderPage()} {/* Yahaan active page render hoga */}
         </Box>
 
-        {/* 4b. Footer (Sticky Footer) */}
+        {/* Footer */}
         <Footer />
       </Box>
       

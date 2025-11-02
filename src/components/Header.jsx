@@ -25,7 +25,7 @@ function Header({toggleDrawer}) {
               Feedback Portal
             </Typography>
           </div>
-          <Avatar alt="User Avatar" src="https://i.pravatar.cc/40" />
+          {/* <Avatar alt="User Avatar" src="https://i.pravatar.cc/40" /> */}
         </Toolbar>
       </AppBar>
   );

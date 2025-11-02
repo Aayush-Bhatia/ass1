@@ -56,7 +56,7 @@ function ModalComponent({ isOpen, onClose, onConfirm, title, message }) {
 
         <Divider />
 
-        {/* Footer with Actions */}
+        {/* Footer */}
         <Box className="flex justify-end gap-2 p-4 bg-gray-50">
           <Button variant="outlined" color="inherit" onClick={onClose}>
             Cancel
